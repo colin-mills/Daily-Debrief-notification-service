@@ -81,6 +81,7 @@ recentLow_USD = "${0:,.2f}".format(recentLow)
 Low = "\nThe recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
 
 message_text = message_text.join([dataTime, ClosePrice, High, Low])
+print(message_text)
 
 content = Content("text/plain", message_text)
 mail = Mail(from_email, subject, to_email, content)
@@ -93,12 +94,12 @@ response = sg.client.mail.send.post(request_body=mail.get())
 
 pp = pprint.PrettyPrinter(indent=4)
 
-print("----------------------")
-print("EMAIL")
-print("----------------------")
-print("RESPONSE: ", type(response))
-print("STATUS:", response.status_code) #> 202 means success
-print("HEADERS:")
-pp.pprint(dict(response.headers))
-print("BODY:")
-print(response.body) #> this might be empty. it's ok.)
+#print("----------------------")
+#print("EMAIL")
+#print("----------------------")
+#print("RESPONSE: ", type(response))
+#print("STATUS:", response.status_code) #> 202 means success
+#print("HEADERS:")
+#pp.pprint(dict(response.headers))
+#print("BODY:")
+#print(response.body) #> this might be empty. it's ok.)
