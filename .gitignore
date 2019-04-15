@@ -2,3 +2,4 @@
 
 # ignore secret environment variable values
 .env
+client_secret.json

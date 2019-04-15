@@ -82,7 +82,6 @@ Low = "\nThe recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
 
 message_text = message_text.join([dataTime, ClosePrice, High, Low])
 print(message_text)
-
 content = Content("text/plain", message_text)
 mail = Mail(from_email, subject, to_email, content)
 
