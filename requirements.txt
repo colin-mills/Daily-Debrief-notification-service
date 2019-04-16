@@ -6,3 +6,5 @@ requests
 flask
 gunicorn
 tweepy
+gspread
+oauth2client
