@@ -70,7 +70,7 @@ def GetStockInfo(ChosenStockTicker):
     #recent average low
     recentLow = min(lows)
     recentLow_USD = "${0:,.2f}".format(recentLow)
-    Low = "\nThe recent low price is: mscbcbbbdjsdjkjsdkjsdvjdbjalasfklashfaksfasvkcabsfjasflafasfbasfjklsahfklasbfklasbfaslkvcasblsblkblsbclsbclsdlbvdbdvkvddkbvdklbdvlkbvdklbdvldbbvdlbdvlkvbkldb".ljust(35) + recentLow_USD.rjust(10)
+    Low = "\nThe recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
 
     
     message_text = message_text.join([stock, dataTime, ClosePrice, High, Low])

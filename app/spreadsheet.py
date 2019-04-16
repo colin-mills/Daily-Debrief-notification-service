@@ -31,7 +31,7 @@ def get_products():
     credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
     #credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
     client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
-    print("GETTING PRODUCTS FROM THE SPREADSHEET...")
+    #print("GETTING PRODUCTS FROM THE SPREADSHEET...")
     doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
     sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
     rows = sheet.get_all_records() #> <class 'list'>
@@ -62,14 +62,3 @@ if __name__ == "__main__":
     for row in rows:
         print(row) #> <class 'dict'>
 
-    #product_attributes = {
-    #    "name": "Product CLI",
-    #    "department": "snacks",
-    #    "price": 4.99,
-    #    "availability_date": "2019-01-01"
-    #}
-    #
-    #print("ADDING A RECORD...")
-    #response = create_product(product_attributes, sheet=sheet, products=rows)
-    ## print(response) #> {'spreadsheetId': 'abc123', 'updatedRange': 'Products!A5:C5', 'updatedRows': 1, 'updatedColumns': 3, 'updatedCells': 3}
-    #print(f"UPDATED RANGE: '{response['updatedRange']}' ({response['updatedCells']} CELLS)")

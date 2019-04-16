@@ -2,6 +2,8 @@
 import os
 import pprint
 import tweepy
+import math
+
 
 
 from dotenv import load_dotenv
@@ -61,7 +63,7 @@ for contact in contactList:
     elif contact["How would you like to be contacted?"] == "Text":
 
         if contact["What Stock Ticker Would you Like Information On?"] != "":
-            send_text = "+" + str(contact["Phone Number"])
+            send_text = "+" + str(contact["Phone number"])
             stock = contact["What Stock Ticker Would you Like Information On?"]
         
             TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
@@ -88,34 +90,56 @@ for contact in contactList:
    
     elif contact["How would you like to be contacted?"] == "Twitter":
 
-        if contact["What Stock Ticker Would you Like Information On?"] != "":
-            stock = contact["What Stock Ticker Would you Like Information On?"]
-            send_tweet = "@" + str(contact["Twitter"]) + " \n" + GetStockInfo(stock) 
+        try:
+            if contact["What Stock Ticker Would you Like Information On?"] != "":
+                stock = contact["What Stock Ticker Would you Like Information On?"]
+                send_tweet = "@" + str(contact["Twitter"]) + " \n" + GetStockInfo(stock) 
 
-            CONSUMER_KEY = os.environ.get("TWITTER_API_KEY")
-            CONSUMER_SECRET = os.environ.get("TWITTER_API_SECRET")
-            ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN")
-            ACCESS_TOKEN_SECRET = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
+                CONSUMER_KEY = os.environ.get("TWITTER_API_KEY")
+                CONSUMER_SECRET = os.environ.get("TWITTER_API_SECRET")
+                ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN")
+                ACCESS_TOKEN_SECRET = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
 
-            # AUTHENTICATE
+                # AUTHENTICATE
 
-            auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-            auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+                auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+                auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-            # INITIALIZE API CLIENT
+                # INITIALIZE API CLIENT
 
-            client = tweepy.API(auth)
+                client = tweepy.API(auth)
 
-            # ISSUE REQUEST(S)
+                # ISSUE REQUEST(S)
 
-            user = client.me() # get information about the currently authenticated user
+                user = client.me() # get information about the currently authenticated user
 
-            time_now = datetime.datetime.now() # a way for us to implement status uniqueness to avoid subsequent tweets running into ... tweepy.error.TweepError: [{'code': 187, 'message': 'Status is a duplicate.'}]
-            time_now_formatted = str(time_now) #> '2019-03-13 16:41:26.282159'
-            #status = "My first tweet sent from https://github.com/colin-mills at {}".format(time_now_formatted)
-            status = send_tweet 
-            response = client.update_status(status=status)
+                time_now = datetime.datetime.now() # a way for us to implement status uniqueness to avoid subsequent tweets running into ... tweepy.error.TweepError: [{'code': 187, 'message': 'Status is a duplicate.'}]
+                time_now_formatted = str(time_now) #> '2019-03-13 16:41:26.282159'
+                #status = "My first tweet sent from https://github.com/colin-mills at {}".format(time_now_formatted)
+                status = send_tweet 
+                tempStatus = status
 
-            # PARSE RESPONSES
+                if int(len(status)) > 240:
+                    start = 0
+                    end = 0
+                    numberTweets = math.ceil(len(status)/200)
+                    for x in range(numberTweets):
+                        status = tempStatus
 
-            pp = pprint.PrettyPrinter(indent=4)
+                        start = (x) * 200
+
+                        if ((x+1) * 200) > len(status):
+                            end = int(len(status))
+                        else:
+                            end = (x+1) * 200
+                        status= status[start:end] + "\nTweet " + str(x + 1) + "/" + str(numberTweets)
+                        response = client.update_status(status=status)
+                else:
+                    response = client.update_status(status=status)
+
+
+                # PARSE RESPONSES
+
+                pp = pprint.PrettyPrinter(indent=4)
+        except tweepy.error.TweepError:
+            print("Allready been posted")
