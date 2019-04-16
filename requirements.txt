@@ -3,3 +3,6 @@ sendgrid
 twilio
 tweepy
 requests
+flask
+gunicorn
+tweepy

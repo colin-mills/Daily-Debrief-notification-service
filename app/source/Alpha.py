@@ -48,9 +48,12 @@ def GetStockInfo(ChosenStockTicker):
         closes.append(tsd[date]["4. close"])
         volumes.append(tsd[date]["5. volume"])
 
+    #Lists name
+    stock = "Stock: " + ChosenStockTicker
+
     #Gets date into readable datetime format
     newestDate = datetime.datetime.fromisoformat(days[0])
-    dataTime = "Latest data from: " + str(newestDate.strftime("%B")) + " " + str(newestDate.day) + ", " + str(newestDate.year)
+    dataTime = "\nLatest data from: " + str(newestDate.strftime("%B")) + " " + str(newestDate.day) + ", " + str(newestDate.year)
 
     #Statistics help from: https://docs.python.org/3/library/statistics.html 
 
@@ -67,10 +70,10 @@ def GetStockInfo(ChosenStockTicker):
     #recent average low
     recentLow = min(lows)
     recentLow_USD = "${0:,.2f}".format(recentLow)
-    Low = "\nThe recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
+    Low = "\nThe recent low price is: mscbcbbbdjsdjkjsdkjsdvjdbjalasfklashfaksfasvkcabsfjasflafasfbasfjklsahfklasbfklasbfaslkvcasblsblkblsbclsbclsdlbvdbdvkvddkbvdklbdvlkbvdklbdvldbbvdlbdvlkvbkldb".ljust(35) + recentLow_USD.rjust(10)
 
     
-    message_text = message_text.join([dataTime, ClosePrice, High, Low])
+    message_text = message_text.join([stock, dataTime, ClosePrice, High, Low])
 
     return message_text
 
