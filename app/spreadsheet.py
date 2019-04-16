@@ -18,7 +18,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 load_dotenv()
 
 DOCUMENT_KEY = os.environ.get("GOOGLE_SHEET_ID", "OOPS Please get the spreadsheet identifier from its URL")
-SHEET_NAME = "contact"
+SHEET_NAME = "Form Responses 1"
 
 CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
 #GOOGLE_API_CREDENTIALS = os.environ.get("GOOGLE_API_CREDENTIALS")
@@ -35,25 +35,22 @@ def get_products():
     doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
     sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
     rows = sheet.get_all_records() #> <class 'list'>
-    return rows #sheet, 
+    return sheet, rows #sheet 
 
 # example product_attributes: {'name': 'Product CLI', 'department': 'snacks', 'price': 4.99, 'availability_date': '2019-01-01'}
 def create_product(product_attributes, sheet=None, products=None):
     if not (sheet and products):
-        print("OH, PREFER TO PASS PREVIOUSLY-OBTAINED SHEET AND PRODUCTS, FOR FASTER PERFORMANCE!")
+        #print("OH, PREFER TO PASS PREVIOUSLY-OBTAINED SHEET AND PRODUCTS, FOR FASTER PERFORMANCE!")
         sheet, products = get_products()
 
-    print(f"DETECTED {len(products)} EXISTING PRODUCTS")
+    print(f"DETECTED {len(products)} EXISTING CONTACTS")
     print("NEW PRODUCT ATTRIBUTES:", product_attributes)
     next_id = len(products) + 1 # number of records, plus one. TODO: max of current ids, plus one
-    product = {
-        "id": next_id,
-        "name": product_attributes["name"],
-        "department": product_attributes["department"],
-        "price": float(product_attributes["price"]),
-        "availability_date": product_attributes["availability_date"]
+    contact = {
+        "email": "cgm71@georgetown.edu",
+        "Stock": "AAPL",
     }
-    next_row = list(product.values()) #> [13, 'Product CLI', 'snacks', 4.99, '2019-01-01']
+    next_row = list(contact.values()) #> [13, 'Product CLI', 'snacks', 4.99, '2019-01-01']
     next_row_number = len(products) + 2 # number of records, plus a header row, plus one
 
     response = sheet.insert_row(next_row, next_row_number)
@@ -71,7 +68,7 @@ if __name__ == "__main__":
     #    "price": 4.99,
     #    "availability_date": "2019-01-01"
     #}
-#
+    #
     #print("ADDING A RECORD...")
     #response = create_product(product_attributes, sheet=sheet, products=rows)
     ## print(response) #> {'spreadsheetId': 'abc123', 'updatedRange': 'Products!A5:C5', 'updatedRows': 1, 'updatedColumns': 3, 'updatedCells': 3}

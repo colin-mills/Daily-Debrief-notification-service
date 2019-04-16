@@ -12,13 +12,15 @@ import datetime
 import statistics
 
 from source.Alpha import GetStockInfo
-from spreadsheet import get_products
+from spreadsheet import get_products, create_product
 
-contactList = get_products()
+headers, contactList = get_products()
 
 for contact in contactList:
 
-    if contact["Stock"] != "":
+    print(contactList)
+
+    if contact["What Stock Ticker Would you Like Information On?"] != "":
         send_email = contact["Email"]
         print (send_email)
         load_dotenv()
@@ -28,7 +30,7 @@ for contact in contactList:
 
         API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
         # AUTHENTICATE
-        stockTicker = contact["Stock"]
+        stockTicker = contact["What Stock Ticker Would you Like Information On?"]
 
 
         sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
