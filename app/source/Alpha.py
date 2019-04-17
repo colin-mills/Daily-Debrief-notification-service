@@ -53,7 +53,7 @@ def GetStockInfo(ChosenStockTicker):
         stock = "Stock: " + ChosenStockTicker
 
         #Gets date into readable datetime format
-        newestDate = datetime.datetime.fromisoformat(days[0])
+        newestDate = datetime.datetime.now #fromisoformat(days[0])
         dataTime = "\nLatest data from: " + str(newestDate.strftime("%B")) + " " + str(newestDate.day) + ", " + str(newestDate.year)
 
         #Statistics help from: https://docs.python.org/3/library/statistics.html 
