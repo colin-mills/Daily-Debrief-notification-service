@@ -54,8 +54,8 @@ for contact in contactList:
 
             # ISSUE REQUEST (SEND EMAIL)
 
-            #response = sg.client.mail.send.post(request_body=mail.get())
-            response = sg.client.mail.send.post(mail.get())
+            response = sg.client.mail.send.post(request_body=mail.get())
+            #response = sg.client.mail.send.post(mail.get())
 
             # PARSE RESPONSE
 
