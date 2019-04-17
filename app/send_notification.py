@@ -38,6 +38,7 @@ for contact in contactList:
             stockTicker = contact["What Stock Ticker Would you Like Information On?"]
 
 
+            #sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
 
             # COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
@@ -53,7 +54,8 @@ for contact in contactList:
 
             # ISSUE REQUEST (SEND EMAIL)
 
-            response = sg.client.mail.send.post(request_body=mail.get())
+            #response = sg.client.mail.send.post(request_body=mail.get())
+            response = sg.client.mail.send.post(mail.get())
 
             # PARSE RESPONSE
 
