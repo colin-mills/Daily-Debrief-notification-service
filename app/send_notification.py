@@ -11,6 +11,9 @@ import sendgrid
 from sendgrid.helpers.mail import * # source of Email, Content, Mail, etc.
 from twilio.rest import Client
 
+from sendgrid import SendGridAPIClient
+#from sendgrid.helpers.mail import Mail
+
 import json
 import requests
 import datetime
@@ -28,12 +31,14 @@ for contact in contactList:
         if contact["What Stock Ticker Would you Like Information On?"] != "":
             send_email = contact["Email"]
             print (send_email)
+            
             load_dotenv()
-
             SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "OOPS, please set env var called 'SENDGRID_API_KEY'")
             MY_EMAIL_ADDRESS = os.environ.get("MY_EMAIL_ADDRESS", "OOPS, please set env var called 'MY_EMAIL_ADDRESS'")
 
-            API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
+            #duplicate??
+            #API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
+            
             # AUTHENTICATE
             stockTicker = contact["What Stock Ticker Would you Like Information On?"]
 
@@ -41,25 +46,19 @@ for contact in contactList:
             #sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
 
-            # COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
-
+            ## COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
             from_email = Email(MY_EMAIL_ADDRESS)
             to_email = Email(send_email)
             subject = "Stock Update"
             message_text = GetStockInfo(stockTicker)
 
-            print(message_text)
+            #print(message_text)
             content = Content("text/plain", message_text)
             mail = Mail(from_email, subject, to_email, content)
 
             # ISSUE REQUEST (SEND EMAIL)
-
             response = sg.client.mail.send.post(request_body=mail.get())
             #response = sg.client.mail.send.post(mail.get())
-
-            # PARSE RESPONSE
-
-            pp = pprint.PrettyPrinter(indent=4)
 
 
     elif contact["How would you like to be contacted?"] == "Text":
