@@ -31,7 +31,8 @@ def send_email(email, message, stock):
     message_text = message
 
     #print(message_text)
-    Hcontent = Content("text/plain", message_text)
+    #Hcontent = Content("text/plain", message_text)
+    Hcontent = Content("text/html", message_text)
     mail = Mail(fromEmail, subjectT, toEmail, Hcontent)
 
     #    subject=subjectT,
@@ -58,7 +59,7 @@ def send_email(email, message, stock):
     }
 
     #try:
-    response = sg.client.mail.send.post(request_body=request_body)
+    response = sg.client.mail.send.post(request_body = request_body)
 
     if __name__ == "__main__":
         print(response.status_code)
