@@ -57,16 +57,16 @@ def send_email(email, message, stock):
     "stock_info": message_text
     }
 
-    try:
-        response = sg.client.mail.send.post(request_body=request_body)
+    #try:
+    response = sg.client.mail.send.post(request_body=request_body)
 
-        if __name__ == "__main__":
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-    except Exception:
-        print("ERROR with sending the email")
-        #print(Exception)
+    if __name__ == "__main__":
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    #except Exception as error:
+     #   print("ERROR with sending the email")
+      #  print(error.__cause__)
 
 def send_text(number, message):
 
