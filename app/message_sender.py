@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import json
 
 #Used for sending email through sendgrid
 import sendgrid
@@ -13,7 +14,7 @@ from twilio.rest import Client
 #used for tweeting 
 import tweepy
 
-def send_email(email, message):
+def send_email(email, message, stock):
     send_email = email #contact["Email"]
             
     load_dotenv()
@@ -23,22 +24,48 @@ def send_email(email, message):
     # AUTHENTICATE
     #stockTicker = contact["What Stock Ticker Would you Like Information On?"]
 
-    #sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
-    sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-
     ## COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
-    from_email = Email(MY_EMAIL_ADDRESS)
-    to_email = Email(send_email)
-    subject = "Stock Update"
+    fromEmail = Email(MY_EMAIL_ADDRESS)
+    toEmail = Email(send_email)
+    #subjectT = "Daily Debrief System Update"
     message_text = message
 
     #print(message_text)
-    content = Content("text/plain", message_text)
-    mail = Mail(from_email, subject, to_email, content)
+    #Hcontent = Content("text/plain", message_text)
+    #mail = Mail(fromEmail, subject, toEmail, Hcontent)
+
+    #    subject=subjectT,
+    #content=Hcontent
+
+    mail = Mail(
+    from_email=fromEmail,
+    to_email=toEmail)
+
+    mail.template_id = 'd-b8e619d4d2b046af9c76cd18740ab021'
+
+    #sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
+    sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
 
     # ISSUE REQUEST (SEND EMAIL)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    #response = sg.client.mail.send.post(mail.get())
+    request_body = mail.get()
+
+    # attach whatever data you want directly...
+    request_body['personalizations'][0]['dynamic_template_data']  = {
+    "name": "User",
+    "stock": stock,
+    "stock_info": message_text
+    }
+
+    try:
+        response = sg.client.mail.send.post(request_body=request_body)
+
+        if __name__ == "__main__":
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+    except Exception:
+        print("ERROR with sending the email")
+        #print(Exception)
 
 def send_text(number, message):
 

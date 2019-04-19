@@ -23,7 +23,7 @@ for contact in contactList:
             message_text = GetStockInfo(stockTicker)
 
             #passes along relevant information to be sent
-            send_email(contact_email, message_text)
+            send_email(contact_email, message_text, stockTicker)
 
     elif contact["How would you like to be contacted?"] == "Text":
 
