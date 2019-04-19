@@ -27,19 +27,19 @@ def send_email(email, message, stock):
     ## COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
     fromEmail = Email(MY_EMAIL_ADDRESS)
     toEmail = Email(send_email)
-    #subjectT = "Daily Debrief System Update"
+    subjectT = "Daily Debrief System Update"
     message_text = message
 
     #print(message_text)
-    #Hcontent = Content("text/plain", message_text)
-    #mail = Mail(fromEmail, subject, toEmail, Hcontent)
+    Hcontent = Content("text/plain", message_text)
+    mail = Mail(fromEmail, subjectT, toEmail, Hcontent)
 
     #    subject=subjectT,
     #content=Hcontent
 
-    mail = Mail(
-    from_email=fromEmail,
-    to_email=toEmail)
+    #mail = Mail(
+    #from_email=fromEmail,
+    #to_email=toEmail)
 
     mail.template_id = 'd-b8e619d4d2b046af9c76cd18740ab021'
 
@@ -47,6 +47,7 @@ def send_email(email, message, stock):
     sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
 
     # ISSUE REQUEST (SEND EMAIL)
+    #HELP with request building from https://github.com/sendgrid/sendgrid-python/issues/591
     request_body = mail.get()
 
     # attach whatever data you want directly...

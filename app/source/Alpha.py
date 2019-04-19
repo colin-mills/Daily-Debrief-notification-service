@@ -54,24 +54,24 @@ def GetStockInfo(ChosenStockTicker):
 
         #Gets date into readable datetime format
         newestDate = datetime.datetime.today() #fromisoformat(days[0])
-        dataTime = "\nLatest data from: " + str(newestDate.month) + "/" + str(newestDate.day) + "/" + str(newestDate.year)
+        dataTime = "<br>Latest data from: " + str(newestDate.month) + "/" + str(newestDate.day) + "/" + str(newestDate.year)
 
         #Statistics help from: https://docs.python.org/3/library/statistics.html 
 
         #Closing stock price
         closingStock = tsd[days[0]]["4. close"]
         closingStock_USD = "${0:,.2f}".format(float(closingStock))
-        ClosePrice = "\nThe latest closing price is: ".ljust(35) + closingStock_USD.rjust(10)
+        ClosePrice = "<br>The latest closing price is: ".ljust(35) + closingStock_USD.rjust(10)
 
         #recent average high
         recentHigh = max(highs)
         recentHigh_USD = "${0:,.2f}".format(recentHigh)
-        High = "\nThe recent high price is: ".ljust(35) + recentHigh_USD.rjust(10)
+        High = "<br>The recent high price is: ".ljust(35) + recentHigh_USD.rjust(10)
 
         #recent average low
         recentLow = min(lows)
         recentLow_USD = "${0:,.2f}".format(recentLow)
-        Low = "\nThe recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
+        Low = "<br>The recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
 
         
         message_text = message_text.join([stock, dataTime, ClosePrice, High, Low])
