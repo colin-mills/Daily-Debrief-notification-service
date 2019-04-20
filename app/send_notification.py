@@ -6,6 +6,7 @@
 #import statistics
 
 from source.Alpha import GetStockInfo
+from source.NYTimes import GetNYTArticles
 from spreadsheet import get_products
 from message_sender import send_email, send_text, send_tweet
 
@@ -16,34 +17,59 @@ for contact in contactList:
 
     if contact["How would you like to be contacted?"] == "Email":
 
+        name = contact["Name"]
+        contact_email = contact["Email"]
+        stockInfo = "No stock information chosen"
+        newsInfo = "No news information chosen"
+        weatherInfo = "No weather information chosen"
+        sportsInfo = "No sports information chosen"
+        musicInfo = "No music information chosen"
+
+
         #TODO: Change this requirement to allow for input of different APIs for each method
         if contact["Would you like stock information?"] == "Yes":
-            contact_email = contact["Email"]
             stockTicker = contact["Stock Ticker"]
             stockInfo = GetStockInfo(stockTicker, 1)
-            name = contact["Name"]
 
             #passes along relevant information to be sent
-            send_email(name, contact_email) #, stockInfo)
+        
+        if contact["Would you like news information?"] == "Yes":
+            if contact["News"] == "NY Times":
+                newsInfo = GetNYTArticles(1)
+
+        
+        #send_email(name, contact_email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo)
 
     elif contact["How would you like to be contacted?"] == "Text":
+        number = "+" + str(contact["Phone number"])
+        content = ""
 
         if contact["Would you like stock information?"] == "Yes":
-            number = "+" + str(contact["Phone number"])
             stock = contact["Stock Ticker"]
-            content = GetStockInfo(stock)
+            content = content + GetStockInfo(stock)
         
-            #passes along relevant information to be sent
-            send_text(number, content)
+        if contact["Would you like news information?"] == "Yes":
+            if contact["News"] == "NY Times":
+                content = content + GetNYTArticles()
+
+        #passes along relevant information to be sent
+        send_text(number, content)
     
     elif contact["How would you like to be contacted?"] == "Twitter":
+        message = "@" + str(contact["Twitter"]) + " \n"
 
         if contact["Would you like stock information?"] == "Yes":
             stock = contact["Stock Ticker"]
-            message = "@" + str(contact["Twitter"]) + " \n" + GetStockInfo(stock) 
+            message = message + GetStockInfo(stock) 
+
+        if contact["Would you like news information?"] == "Yes":
+            if contact["News"] == "NY Times":
+                message = message + GetNYTArticles()
+
+        
             
-            #passes along relevant information to be sent
-            send_tweet(message)
+        #passes along relevant information to be sent
+        send_tweet(message)
 
 if __name__ == "__main__":
     print("headers:", headers)

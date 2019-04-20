@@ -12,9 +12,10 @@ import twilio
 from twilio.rest import Client
 
 #used for tweeting 
+import math
 import tweepy
 
-def send_email(name = "User", email = "cgm71@georgetown.edu", stockInfo = "No stock information chosen", newsInfo = "No news information chosen", weatherInfo = "No weather information chosen", sportsInfo = "No sports information chosen", musicInfo = "No music information chosen"):
+def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo):
     send_email = email #contact["Email"]
             
     load_dotenv()
@@ -28,7 +29,7 @@ def send_email(name = "User", email = "cgm71@georgetown.edu", stockInfo = "No st
     fromEmail = Email(MY_EMAIL_ADDRESS)
     toEmail = Email(send_email)
     subjectT = "Daily Debrief System Update"
-    message_text = " "
+    message_text = "Not nescesary"
 
     #print(message_text)
     #Hcontent = Content("text/plain", message_text)

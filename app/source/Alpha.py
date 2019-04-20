@@ -1,9 +1,9 @@
 import os
-import pprint
+#import pprint
 
 from dotenv import load_dotenv
-import sendgrid
-from sendgrid.helpers.mail import * # source of Email, Content, Mail, etc.
+#import sendgrid
+#from sendgrid.helpers.mail import * # source of Email, Content, Mail, etc.
 
 import json
 import requests
