@@ -37,6 +37,12 @@ for contact in contactList:
             if contact["News"] == "NY Times":
                 newsInfo = GetNYTArticles(1)
 
+        if contact["Would you like weather information?"] == "Yes":
+
+        if contact["Would you like sports information?"] == "Yes":
+
+        if contact["Would you like music information?"] == "Yes":
+
         
         #send_email(name, contact_email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo)
 
