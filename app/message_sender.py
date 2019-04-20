@@ -14,7 +14,7 @@ from twilio.rest import Client
 #used for tweeting 
 import tweepy
 
-def send_email(email, message, stock):
+def send_email(name = "User", email = "cgm71@georgetown.edu", stockInfo = "No stock information chosen", newsInfo = "No news information chosen", weatherInfo = "No weather information chosen", sportsInfo = "No sports information chosen", musicInfo = "No music information chosen"):
     send_email = email #contact["Email"]
             
     load_dotenv()
@@ -28,7 +28,7 @@ def send_email(email, message, stock):
     fromEmail = Email(MY_EMAIL_ADDRESS)
     toEmail = Email(send_email)
     subjectT = "Daily Debrief System Update"
-    message_text = message
+    message_text = " "
 
     #print(message_text)
     #Hcontent = Content("text/plain", message_text)
@@ -53,18 +53,21 @@ def send_email(email, message, stock):
 
     # attach whatever data you want directly...
     request_body['personalizations'][0]['dynamic_template_data']  = {
-    "name": "User",
-    "stock": stock,
-    "stock_info": message_text
+    "name": name,
+    "stock_info": stockInfo,
+    "news_info": newsInfo,
+    "weather_info": weatherInfo,
+    "sports_info": sportsInfo,
+    "music_info": musicInfo
     }
-
+    print(request_body)
     #try:
-    response = sg.client.mail.send.post(request_body = request_body)
+    response = sg.client.mail.send.post(request_body=request_body)
 
-    if __name__ == "__main__":
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+    #if __name__ == "__main__":
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
     #except Exception as error:
      #   print("ERROR with sending the email")
       #  print(error.__cause__)

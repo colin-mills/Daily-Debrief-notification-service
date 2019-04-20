@@ -17,19 +17,20 @@ for contact in contactList:
     if contact["How would you like to be contacted?"] == "Email":
 
         #TODO: Change this requirement to allow for input of different APIs for each method
-        if contact["What Stock Ticker Would you Like Information On?"] != "":
+        if contact["Would you like stock information?"] == "Yes":
             contact_email = contact["Email"]
-            stockTicker = contact["What Stock Ticker Would you Like Information On?"]
-            message_text = GetStockInfo(stockTicker)
+            stockTicker = contact["Stock Ticker"]
+            stockInfo = GetStockInfo(stockTicker, 1)
+            name = contact["Name"]
 
             #passes along relevant information to be sent
-            send_email(contact_email, message_text, stockTicker)
+            send_email(name, contact_email) #, stockInfo)
 
     elif contact["How would you like to be contacted?"] == "Text":
 
-        if contact["What Stock Ticker Would you Like Information On?"] != "":
+        if contact["Would you like stock information?"] == "Yes":
             number = "+" + str(contact["Phone number"])
-            stock = contact["What Stock Ticker Would you Like Information On?"]
+            stock = contact["Stock Ticker"]
             content = GetStockInfo(stock)
         
             #passes along relevant information to be sent
@@ -37,8 +38,8 @@ for contact in contactList:
     
     elif contact["How would you like to be contacted?"] == "Twitter":
 
-        if contact["What Stock Ticker Would you Like Information On?"] != "":
-            stock = contact["What Stock Ticker Would you Like Information On?"]
+        if contact["Would you like stock information?"] == "Yes":
+            stock = contact["Stock Ticker"]
             message = "@" + str(contact["Twitter"]) + " \n" + GetStockInfo(stock) 
             
             #passes along relevant information to be sent

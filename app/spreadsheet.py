@@ -17,10 +17,10 @@ from oauth2client.service_account import ServiceAccountCredentials
 load_dotenv()
 
 DOCUMENT_KEY = os.environ.get("GOOGLE_SHEET_ID", "OOPS Please get the spreadsheet identifier from its URL")
-SHEET_NAME = "Form Responses 1"
+SHEET_NAME = "Form Responses 2"
 
-#CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
-GOOGLE_API_CREDENTIALS = os.environ.get("GOOGLE_API_CREDENTIALS")
+CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
+#GOOGLE_API_CREDENTIALS = os.environ.get("GOOGLE_API_CREDENTIALS")
 
 AUTH_SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets", #> Allows read/write access to the user's sheets and their properties.
@@ -28,8 +28,8 @@ AUTH_SCOPE = [
 ]
 
 def get_products():
-    #credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
-    credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
+    #credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
     client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
     doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
     sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
