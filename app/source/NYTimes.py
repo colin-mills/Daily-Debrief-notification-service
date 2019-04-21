@@ -4,9 +4,9 @@ import json
 import requests
 
 
-def GetNYTArticles(ArticleNum = 0, email = 0):
+def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
 
-        message_text = " "
+        message_text = ""
 
         if ArticleNum == 0:
                 if email == 1:
@@ -29,10 +29,13 @@ def GetNYTArticles(ArticleNum = 0, email = 0):
 
 
         index = ArticleNum + 1
+
         if email == 1:
-                message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "<br>URL:" + parsed_response["results"][ArticleNum]["url"] + "<br>"
+                message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "<br>URL :" + parsed_response["results"][ArticleNum]["url"] + "<br>"
+        elif tweet == 1:
+                message_text = message_text + "\n" + str(index) + ": "  + "URL: " + parsed_response["results"][ArticleNum]["url"] + "\n" + parsed_response["results"][ArticleNum]["abstract"]
         else:
-                message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "\nURL:" + parsed_response["results"][ArticleNum]["url"] + "\n"
+                message_text = message_text + "\n" + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "\nURL :" + parsed_response["results"][ArticleNum]["url"] + "\n"
         if __name__ == "__main__":
             
                 print(type(parsed_response))
