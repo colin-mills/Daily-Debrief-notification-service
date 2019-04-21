@@ -90,7 +90,7 @@ def send_text(number, message):
     # ISSUE REQUEST (SEND SMS)
     message = client.messages.create(to=send_text, from_=SENDER_SMS, body=content)
 
-def send_tweet (message):
+def send_tweet (twitterHandle, message):
 
     CONSUMER_KEY = os.environ.get("TWITTER_API_KEY")
     CONSUMER_SECRET = os.environ.get("TWITTER_API_SECRET")
@@ -110,7 +110,7 @@ def send_tweet (message):
 
     user = client.me() # get information about the currently authenticated user
 
-    status = message 
+    status = twitterHandle + " \n" message 
     tempStatus = message
 
     try:

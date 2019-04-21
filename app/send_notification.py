@@ -26,18 +26,18 @@ for contact in contactList:
         musicInfo = "No music information chosen"
 
 
-        #TODO: Change this requirement to allow for input of different APIs for each method
         if contact["Would you like stock information?"] == "Yes":
-            stockTicker = contact["Stock Ticker"]
-            stockInfo = GetStockInfo(stockTicker, 1)
+            for stock in range(contact["How many stocks would you like?"]):
+                stockTicker = contact["Stock Ticker"]
+                stockInfo = stockInfo + GetStockInfo(stockTicker, 1)
 
             #passes along relevant information to be sent
         
         if contact["Would you like news information?"] == "Yes":
-            if contact["News"] == "NY Times":
-                newsInfo = GetNYTArticles(1)
+            newsInfo = GetNYTArticles(1)
 
         if contact["Would you like weather information?"] == "Yes":
+
 
         if contact["Would you like sports information?"] == "Yes":
 
@@ -51,29 +51,42 @@ for contact in contactList:
         content = ""
 
         if contact["Would you like stock information?"] == "Yes":
-            stock = contact["Stock Ticker"]
-            content = content + GetStockInfo(stock)
+             for stock in range(contact["How many stocks would you like?"]):
+                stockTicker = contact["Stock Ticker"]
+                content = content + GetStockInfo(stockTicker)
         
         if contact["Would you like news information?"] == "Yes":
-            if contact["News"] == "NY Times":
-                content = content + GetNYTArticles()
+            content = content + GetNYTArticles()
 
+        if contact["Would you like weather information?"] == "Yes":
+
+        if contact["Would you like sports information?"] == "Yes":
+
+        if contact["Would you like music information?"] == "Yes":
         #passes along relevant information to be sent
+        
         send_text(number, content)
     
     elif contact["How would you like to be contacted?"] == "Twitter":
-        message = "@" + str(contact["Twitter"]) + " \n"
+        Handle = "@" + str(contact["Twitter"])
 
         if contact["Would you like stock information?"] == "Yes":
-            stock = contact["Stock Ticker"]
-            message = message + GetStockInfo(stock) 
+             for stock in range(contact["How many stocks would you like?"]):
+                stockTicker = contact["Stock Ticker"]
+                message = GetStockInfo(stockTicker)
+                send_tweet(Handle, message)
 
         if contact["Would you like news information?"] == "Yes":
-            if contact["News"] == "NY Times":
-                message = message + GetNYTArticles()
+            for article in range(contact["How many articles would you like to see?"]):
+                message = GetNYTArticles(article)
+                send_tweet(Handle, message)
 
-        
-            
+        if contact["Would you like weather information?"] == "Yes":
+
+        if contact["Would you like sports information?"] == "Yes":
+
+        if contact["Would you like music information?"] == "Yes":
+
         #passes along relevant information to be sent
         send_tweet(message)
 

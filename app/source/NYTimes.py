@@ -4,12 +4,13 @@ import json
 import requests
 
 
-def GetNYTArticles(email = 0, numberArticles = 3):
+def GetNYTArticles(ArticleNum = 0, email = 0):
 
-        if email == 1:
-                 message_text = "Top NY Times articles for today:<br>"
-        else:
-                message_text = "\nTop NY Times articles for today:\n"    
+        if ArticleNum == 0:
+                if email == 1:
+                        message_text = "Top NY Times articles for today:<br>"
+                else:
+                        message_text = "\nTop NY Times articles for today:\n"    
 
         load_dotenv()
 
@@ -25,12 +26,11 @@ def GetNYTArticles(email = 0, numberArticles = 3):
         parsed_response = json.loads(response.text)
 
 
-        for article in range(numberArticles):
-                index = article + 1
-                if email == 1:
-                        message_text = message_text + str(index) + ": " + parsed_response["results"][article]["abstract"] + "<br>URL:" + parsed_response["results"][article]["url"] + "<br>"
-                else:
-                        message_text = message_text + str(index) + ": " + parsed_response["results"][article]["abstract"] + "\nURL:" + parsed_response["results"][article]["url"] + "\n"
+        index = ArticleNum + 1
+        if email == 1:
+                message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "<br>URL:" + parsed_response["results"][ArticleNum]["url"] + "<br>"
+        else:
+                message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "\nURL:" + parsed_response["results"][ArticleNum]["url"] + "\n"
         if __name__ == "__main__":
             
                 print(type(parsed_response))
