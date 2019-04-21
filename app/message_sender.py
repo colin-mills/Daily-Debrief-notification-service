@@ -15,7 +15,7 @@ from twilio.rest import Client
 import math
 import tweepy
 
-def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo):
+def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
     send_email = email #contact["Email"]
             
     load_dotenv()
@@ -58,8 +58,7 @@ def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicI
     "stock_info": stockInfo,
     "news_info": newsInfo,
     "weather_info": weatherInfo,
-    "sports_info": sportsInfo,
-    "music_info": musicInfo
+    "sports_info": sportsInfo
     }
     print(request_body)
     #try:
@@ -110,7 +109,7 @@ def send_tweet (twitterHandle, message):
 
     user = client.me() # get information about the currently authenticated user
 
-    status = twitterHandle + " \n" + message 
+    status = twitterHandle + message 
     tempStatus = message
 
     try:

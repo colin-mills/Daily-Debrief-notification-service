@@ -12,7 +12,7 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
                 if email == 1:
                         message_text = "Top NY Times articles for today:<br>"
                 else:
-                        message_text = "\nTop NY Times articles for today:\n"    
+                        message_text = "\nTop NY Times articles for today:"    
 
         load_dotenv()
 
