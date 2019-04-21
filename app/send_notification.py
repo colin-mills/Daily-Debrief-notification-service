@@ -35,7 +35,7 @@ for contact in contactList:
         
         if contact["Would you like news information?"] == "Yes":
             for article in range(int(contact["How many articles would you like to see?"])):
-                newsInfo = GetNYTArticles(1)
+                newsInfo = GetNYTArticles(article, 1)
 
         if contact["Would you like weather information?"] == "Yes":
             print("weather info in here")
@@ -45,7 +45,7 @@ for contact in contactList:
             print("music info in here")
 
         
-        #send_email(name, contact_email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo)
+        send_email(name, contact_email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo)
 
     elif contact["How would you like to be contacted?"] == "Text":
         number = "+" + str(contact["Phone number"])
@@ -58,7 +58,7 @@ for contact in contactList:
         
         if contact["Would you like news information?"] == "Yes":
             for article in range(int(contact["How many articles would you like to see?"])):
-                content = content + GetNYTArticles()
+                content = content + GetNYTArticles(article)
 
         if contact["Would you like weather information?"] == "Yes":
             print("weather info in here")
