@@ -17,7 +17,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 load_dotenv()
 
 DOCUMENT_KEY = os.environ.get("GOOGLE_SHEET_ID", "OOPS Please get the spreadsheet identifier from its URL")
-SHEET_NAME = "Form Responses 2"
+SHEET_NAME = "Form Responses 4"
 
 CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
 #GOOGLE_API_CREDENTIALS = os.environ.get("GOOGLE_API_CREDENTIALS")

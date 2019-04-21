@@ -6,6 +6,8 @@ import requests
 
 def GetNYTArticles(ArticleNum = 0, email = 0):
 
+        message_text = " "
+
         if ArticleNum == 0:
                 if email == 1:
                         message_text = "Top NY Times articles for today:<br>"

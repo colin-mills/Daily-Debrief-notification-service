@@ -1,10 +1,5 @@
 import os
-#import pprint
-
 from dotenv import load_dotenv
-#import sendgrid
-#from sendgrid.helpers.mail import * # source of Email, Content, Mail, etc.
-
 import json
 import requests
 import datetime
@@ -49,10 +44,11 @@ def GetStockInfo(ChosenStockTicker, email = 0):
             closes.append(tsd[date]["4. close"])
             volumes.append(tsd[date]["5. volume"])
 
-        #Lists name
-        stock = "Stock: " + ChosenStockTicker
+        
 
         if email == 1:
+            #Lists name
+            stock = "<br>Stock: " + ChosenStockTicker
             #Gets date into readable datetime format
             newestDate = datetime.datetime.today() #fromisoformat(days[0])
             dataTime = "<br>Latest data from: " + str(newestDate.month) + "/" + str(newestDate.day) + "/" + str(newestDate.year)
@@ -74,6 +70,8 @@ def GetStockInfo(ChosenStockTicker, email = 0):
             recentLow_USD = "${0:,.2f}".format(recentLow)
             Low = "<br>The recent low price is: ".ljust(35) + recentLow_USD.rjust(10)
         else:
+            #Lists name
+            stock = "\nStock: " + ChosenStockTicker
             #Gets date into readable datetime format
             newestDate = datetime.datetime.today() #fromisoformat(days[0])
             dataTime = "\nLatest data from: " + str(newestDate.month) + "/" + str(newestDate.day) + "/" + str(newestDate.year)
@@ -101,6 +99,8 @@ def GetStockInfo(ChosenStockTicker, email = 0):
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
     except KeyError:
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
+    
+    
     return message_text
 
 

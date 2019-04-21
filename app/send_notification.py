@@ -27,21 +27,22 @@ for contact in contactList:
 
 
         if contact["Would you like stock information?"] == "Yes":
-            for stock in range(contact["How many stocks would you like?"]):
-                stockTicker = contact["Stock Ticker"]
+            for stock in range(int(contact["How many stocks would you like?"])):
+                stockTicker = contact["Stock " + str(stock + 1)]
                 stockInfo = stockInfo + GetStockInfo(stockTicker, 1)
 
             #passes along relevant information to be sent
         
         if contact["Would you like news information?"] == "Yes":
-            newsInfo = GetNYTArticles(1)
+            for article in range(int(contact["How many articles would you like to see?"])):
+                newsInfo = GetNYTArticles(1)
 
         if contact["Would you like weather information?"] == "Yes":
-
-
+            print("weather info in here")
         if contact["Would you like sports information?"] == "Yes":
-
+            print("sports info in here")
         if contact["Would you like music information?"] == "Yes":
+            print("music info in here")
 
         
         #send_email(name, contact_email, stockInfo, newsInfo, weatherInfo, sportsInfo, musicInfo)
@@ -51,44 +52,47 @@ for contact in contactList:
         content = ""
 
         if contact["Would you like stock information?"] == "Yes":
-             for stock in range(contact["How many stocks would you like?"]):
-                stockTicker = contact["Stock Ticker"]
+             for stock in range(int(contact["How many stocks would you like?"])):
+                stockTicker = contact["Stock " + str(stock + 1)]
                 content = content + GetStockInfo(stockTicker)
         
         if contact["Would you like news information?"] == "Yes":
-            content = content + GetNYTArticles()
+            for article in range(int(contact["How many articles would you like to see?"])):
+                content = content + GetNYTArticles()
 
         if contact["Would you like weather information?"] == "Yes":
-
+            print("weather info in here")
         if contact["Would you like sports information?"] == "Yes":
-
+            print("sports info in here")
         if contact["Would you like music information?"] == "Yes":
+            print("music info in here")
+       
         #passes along relevant information to be sent
-        
         send_text(number, content)
     
     elif contact["How would you like to be contacted?"] == "Twitter":
         Handle = "@" + str(contact["Twitter"])
 
         if contact["Would you like stock information?"] == "Yes":
-             for stock in range(contact["How many stocks would you like?"]):
-                stockTicker = contact["Stock Ticker"]
+             for stock in range(int(contact["How many stocks would you like?"])):
+                stockTicker = contact["Stock " + str(stock + 1)]
                 message = GetStockInfo(stockTicker)
                 send_tweet(Handle, message)
 
         if contact["Would you like news information?"] == "Yes":
-            for article in range(contact["How many articles would you like to see?"]):
+            for article in range(int(contact["How many articles would you like to see?"])):
                 message = GetNYTArticles(article)
                 send_tweet(Handle, message)
 
         if contact["Would you like weather information?"] == "Yes":
-
+            print("weather info in here")
         if contact["Would you like sports information?"] == "Yes":
-
+            print("sports info in here")
         if contact["Would you like music information?"] == "Yes":
+            print("music info in here")
 
         #passes along relevant information to be sent
-        send_tweet(message)
+        send_tweet(Handle, message)
 
 if __name__ == "__main__":
     print("headers:", headers)
