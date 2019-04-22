@@ -99,7 +99,9 @@ def GetStockInfo(ChosenStockTicker, email = 0):
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
     except KeyError:
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
-    
+    except Exception:
+        print(Exception)
+        message_text = "Something unexpected went wrong while gathering stock information."
     
     return message_text
 

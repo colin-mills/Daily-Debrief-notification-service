@@ -16,7 +16,7 @@ import math
 import tweepy
 
 def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
-    send_email = email #contact["Email"]
+    send_email = email
             
     load_dotenv()
     SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "OOPS, please set env var called 'SENDGRID_API_KEY'")
@@ -35,13 +35,6 @@ def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
     #Hcontent = Content("text/plain", message_text)
     Hcontent = Content("text/html", message_text)
     mail = Mail(fromEmail, subjectT, toEmail, Hcontent)
-
-    #    subject=subjectT,
-    #content=Hcontent
-
-    #mail = Mail(
-    #from_email=fromEmail,
-    #to_email=toEmail)
 
     mail.template_id = 'd-b8e619d4d2b046af9c76cd18740ab021'
 
@@ -68,9 +61,6 @@ def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
     print(response.status_code)
     print(response.body)
     print(response.headers)
-    #except Exception as error:
-     #   print("ERROR with sending the email")
-      #  print(error.__cause__)
 
 def send_text(number, message):
 
