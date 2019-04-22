@@ -38,9 +38,11 @@ def get_products():
     except TypeError:
         print(TypeError)
         rows = sheet = []
+        print("Error in spreadsheet.py")
     except Exception:
         print(Exception)
         rows = sheet = []
+        print("Error in spreadsheet.py")
     return sheet, rows #sheet 
 
 

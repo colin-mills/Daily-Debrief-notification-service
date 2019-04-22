@@ -53,9 +53,11 @@ def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
         response = sg.client.mail.send.post(request_body=request_body)
     except TypeError:
         print(TypeError)
+        print("Error sending Email")
         print(response)
     except Exception:
         print(Exception)
+        print("Error sending Email")
         print(response)
 
     if __name__ == "__main__":
@@ -84,6 +86,7 @@ def send_text(number, message):
         message = client.messages.create(to=send_text, from_=SENDER_SMS, body=content)
     except Exception:
         print(Exception)
+        print("Error sending Text")
         print(message)
     
 def send_tweet (twitterHandle, message):
@@ -130,6 +133,7 @@ def send_tweet (twitterHandle, message):
         print("Already been posted")
     except Exception:
         print(Exception)
+        print("Error posting Tweet")
         print(response)
 
 

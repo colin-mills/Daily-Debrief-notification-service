@@ -132,13 +132,18 @@ def getSportsInfo(sportLeague, email = 0):
                     for division in league["divisions"]:
                         message_text =  message_text + "The number one team in the " + division["name"] + " is the " + division["teams"][0]["name"] + " (league: " + str(division["teams"][0]["rank"]["league"]) + ")\n"     
 
-    except KeyError:
+    except KeyError as key:
         print(KeyError)
         message_text = "Sorry we can't gather sports information at this moment"
-    except Exception:
+        print("Error sent from SportRadar.py")
+        print(message_text)
+        print(key.__cause__)
+    except Exception as e:
         print(Exception)
         message_text = "Something unexpected went wrong while gathering sports information."
-    
+        print("Error sent from SportRadar.py")
+        print(message_text)
+        print(e.__cause__)
     return message_text
 
 if __name__ == "__main__":

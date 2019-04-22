@@ -51,13 +51,18 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
                                 x = x + 1
                                 #print(parsed_response)
         
-        except KeyError:
+        except KeyError as key:
                 print(KeyError)
                 message_text = "Sorry we can't gather news information at this moment"
-        except Exception:
+                print("Error sent from NYTimes.py")
+                print(message_text)
+                print(key.__cause__)
+        except Exception as e:
                 print(Exception)
                 message_text = "Something unexpected went wrong while gathering news information."
-    
+                print("Error sent from NYTimes.py")
+                print(message_text)
+                print(e.__cause__)
         return message_text
 if __name__ == "__main__":
     message = GetNYTArticles(4,0,0)

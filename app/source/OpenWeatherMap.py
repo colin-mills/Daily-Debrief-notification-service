@@ -39,13 +39,18 @@ def getWeatherInfo(zip, email = 0):
             print(parsed_response["name"])
             #print(message_text)
 
-    except KeyError:
+    except KeyError as key:
         print(KeyError)
         message_text = "Sorry we can't gather weather information at this moment"
-    except Exception:
+        print("Error sent from OpenWeatherMap.py")
+        print(message_text)
+        print(key.__cause__)
+    except Exception as e:
         print(Exception)
         message_text = "Something unexpected went wrong while gathering weather information."
-
+        print("Error sent from OpenWeatherMap.py")
+        print(message_text)
+        print(e.__cause__)
     return message_text
 if __name__ == "__main__":
     weather = getWeatherInfo("20057")

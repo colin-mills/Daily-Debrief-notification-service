@@ -97,12 +97,17 @@ def GetStockInfo(ChosenStockTicker, email = 0):
         message_text = message_text.join([stock, dataTime, ClosePrice, High, Low])
     except requests.exceptions.ConnectionError:
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
-    except KeyError:
+    except KeyError as key:
         message_text = "Sorry we can't find any trading data for " + stockTicker + "."
-    except Exception:
+        print("Error sent from Alpha.py")
+        print(message_text)
+        print(key.__cause__)
+    except Exception as e:
         print(Exception)
         message_text = "Something unexpected went wrong while gathering stock information."
-    
+        print("Error sent from Alpha.py")
+        print(message_text)
+        print(e.__cause__)
     return message_text
 
 
