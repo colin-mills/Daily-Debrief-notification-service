@@ -22,7 +22,7 @@ def getWeatherInfo(zip, email = 0):
 
         if email == 1:
             message_text = message_text + "City: " + city + "<br>"
-            message_text = message_text + "Temperature: " + str(parsed_response["main"]["temp"]) + "degrees fahrenheit <br>"
+            message_text = message_text + "Temperature: " + str(parsed_response["main"]["temp"]) + " degrees fahrenheit <br>"
             message_text = message_text + "Wind speed: " + str(parsed_response["wind"]["speed"]) + " MPH <br>"
             message_text = message_text + "Cloud coverage: " + str(parsed_response["clouds"]["all"]) + "%<br>"
             message_text = message_text + "Description: " + parsed_response["weather"][0]["description"] + "<br>"
