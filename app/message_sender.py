@@ -107,7 +107,7 @@ def send_tweet (twitterHandle, message):
 
     # ISSUE REQUEST(S)
 
-    user = client.me() # get information about the currently authenticated user
+    #user = client.me() # get information about the currently authenticated user
 
     status = twitterHandle + "\n" + message 
     tempStatus = message
@@ -118,6 +118,7 @@ def send_tweet (twitterHandle, message):
             start = 0
             end = 0
             numberTweets = math.ceil(len(status)/200)
+            #breaks tweets up into strings of 200 characters to not exceed tweet character limit
             for x in range(numberTweets):
                 status = tempStatus
 

@@ -40,7 +40,7 @@ for contact in contactList:
 
         if contact["Would you like sports information?"] == "Yes":
             sport = contact["Which sport would you like updates on?"]
-            sportsInfo = getSportsInfo(sport, 1)
+            sportsInfo = getSportsInfo(sport, email=1)
         else:
             sportsInfo = "No sports information chosen"
 
@@ -56,6 +56,7 @@ for contact in contactList:
 
         if contact["Would you like weather information?"] == "Yes":
             zipCode = contact["Zip code"]
+            print("ZIPCODE", zipCode)
             weatherInfo = getWeatherInfo(zipCode)
             send_text(number, weatherInfo)
         
@@ -90,7 +91,7 @@ for contact in contactList:
 
         if contact["Would you like stock information?"] == "Yes":
              for stock in range(int(contact["Number of stocks"])):
-                stockTicker = contact["Stock " + str(stock + 1)] + "\n"
+                stockTicker = contact["Stock " + str(stock + 1)]
                 stockInfo =  GetStockInfo(stockTicker)
                 send_tweet(Handle, stockInfo)
 

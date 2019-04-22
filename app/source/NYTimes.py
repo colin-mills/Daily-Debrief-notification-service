@@ -33,7 +33,7 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
         if email == 1:
                 message_text = message_text + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "<br>URL :" + parsed_response["results"][ArticleNum]["url"] + "<br>"
         elif tweet == 1:
-                message_text = message_text + "\n" + str(index) + ": "  + "URL: " + parsed_response["results"][ArticleNum]["url"] + "\n" + parsed_response["results"][ArticleNum]["abstract"]
+                message_text = message_text + "\n" + str(index) + ": "  + "URL: " + parsed_response["results"][ArticleNum]["url"] + "\n" + parsed_response["results"][ArticleNum]["abstract"] + "\n"
         else:
                 message_text = message_text + "\n" + str(index) + ": " + parsed_response["results"][ArticleNum]["abstract"] + "\nURL :" + parsed_response["results"][ArticleNum]["url"] + "\n"
         if __name__ == "__main__":
@@ -44,7 +44,7 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
 
                 for result in parsed_response["results"]:
                         #print(x, ": ", result.keys())
-                        if x <= 3:
+                        if index <= 5:
                                 print(x, ": ", result["url"])
                                 print(result["abstract"])
                         x = x + 1
@@ -54,4 +54,5 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
         
 
 if __name__ == "__main__":
-    GetNYTArticles()
+    message = GetNYTArticles(4,0,0)
+    print(message)
