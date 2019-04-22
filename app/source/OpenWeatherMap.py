@@ -19,13 +19,14 @@ def getWeatherInfo(zip, email = 0):
     parsed_response = json.loads(response.text)
 
     if email == 1:
-        message_text = "Weather report from: " + str(parsed_response["name"]) + "<br>"
+        message_text = message_text + "City: " + str(parsed_response["name"]) + "<br>"
         message_text = message_text + "Temperature: " + str(parsed_response["main"]["temp"]) + "degrees fahrenheit <br>"
         message_text = message_text + "Wind speed: " + str(parsed_response["wind"]["speed"]) + " MPH <br>"
         message_text = message_text + "Cloud coverage: " + str(parsed_response["clouds"]["all"]) + "%<br>"
         message_text = message_text + "Description: " + parsed_response["weather"][0]["description"] + "<br>"
     else:
-        message_text = "City: " + str(parsed_response["name"]) + "\n"
+        message_text = "Daily weather report: \n"
+        message_text = message_text + "City: " + str(parsed_response["name"]) + "\n"
         message_text = message_text + "Temperature: " + str(parsed_response["main"]["temp"]) + " degrees fahrenheit \n"
         message_text = message_text + "Wind speed: " + str(parsed_response["wind"]["speed"]) + " MPH \n"
         message_text = message_text + "Cloud coverage: " + str(parsed_response["clouds"]["all"]) + "%\n"

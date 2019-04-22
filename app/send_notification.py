@@ -56,7 +56,6 @@ for contact in contactList:
 
         if contact["Would you like weather information?"] == "Yes":
             zipCode = contact["Zip code"]
-            print("ZIPCODE", zipCode)
             weatherInfo = getWeatherInfo(zipCode)
             send_text(number, weatherInfo)
         
