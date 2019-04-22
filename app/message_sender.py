@@ -109,7 +109,7 @@ def send_tweet (twitterHandle, message):
 
     user = client.me() # get information about the currently authenticated user
 
-    status = twitterHandle + message 
+    status = twitterHandle + "\n" + message 
     tempStatus = message
 
     try:
