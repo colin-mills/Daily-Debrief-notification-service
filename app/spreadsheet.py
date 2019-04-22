@@ -28,12 +28,19 @@ AUTH_SCOPE = [
 ]
 
 def get_products():
-    #credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
-    credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
-    client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
-    doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
-    sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
-    rows = sheet.get_all_records() #> <class 'list'>
+    try:
+        #credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
+        credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
+        client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
+        doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
+        sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
+        rows = sheet.get_all_records() #> <class 'list'>
+    except TypeError:
+        print(TypeError)
+        sheet = rows = 0
+    except Exception:
+        print(Exception)
+        sheet = rows = 0
     return sheet, rows #sheet 
 
 
