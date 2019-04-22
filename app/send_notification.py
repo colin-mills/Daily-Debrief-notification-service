@@ -7,7 +7,7 @@ from message_sender import send_email, send_text, send_tweet
 
 #Retrieves user information from google sheet and reads into list of dictionaries
 headers, contactList = get_products()
-if contactList == "":
+if contactList == []:
     print("ERROR: Contact List is empty, either there is an unexpected error or the spreadsheet is empty.")
 else:
     for contact in contactList:

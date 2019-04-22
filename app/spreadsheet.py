@@ -37,10 +37,10 @@ def get_products():
         rows = sheet.get_all_records() #> <class 'list'>
     except TypeError:
         print(TypeError)
-        sheet = rows = 0
+        rows = sheet = []
     except Exception:
         print(Exception)
-        sheet = rows = 0
+        rows = sheet = []
     return sheet, rows #sheet 
 
 
