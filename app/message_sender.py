@@ -1,3 +1,5 @@
+# adapted from https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/sendgrid.md
+#General packages
 import os
 from dotenv import load_dotenv
 import json
@@ -16,29 +18,22 @@ import math
 import tweepy
 
 def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
-    send_email = email
-            
+
+    #Config nescesary environment variables        
     load_dotenv()
     SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", "OOPS, please set env var called 'SENDGRID_API_KEY'")
     MY_EMAIL_ADDRESS = os.environ.get("MY_EMAIL_ADDRESS", "OOPS, please set env var called 'MY_EMAIL_ADDRESS'")
-    
-    # AUTHENTICATE
-    #stockTicker = contact["What Stock Ticker Would you Like Information On?"]
 
     ## COMPILE REQUEST PARAMETERS (PREPARE THE EMAIL)
     fromEmail = Email(MY_EMAIL_ADDRESS)
-    toEmail = Email(send_email)
-    subjectT = "Daily Debrief System Update"
+    toEmail = Email(email)
+    subjectT = "Daily Debrief Service"
     message_text = "Not nescesary"
 
-    #print(message_text)
-    #Hcontent = Content("text/plain", message_text)
     Hcontent = Content("text/html", message_text)
     mail = Mail(fromEmail, subjectT, toEmail, Hcontent)
 
     mail.template_id = 'd-b8e619d4d2b046af9c76cd18740ab021'
-
-    #sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
     sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
 
     # ISSUE REQUEST (SEND EMAIL)
@@ -53,17 +48,25 @@ def send_email(name, email, stockInfo, newsInfo, weatherInfo, sportsInfo):
     "weather_info": weatherInfo,
     "sports_info": sportsInfo
     }
-    print(request_body)
-    #try:
-    response = sg.client.mail.send.post(request_body=request_body)
+    
+    try:
+        response = sg.client.mail.send.post(request_body=request_body)
+    except TypeError:
+        print(TypeError)
+        print(response)
+    except Exception:
+        print(Exception)
+        print(response)
 
-    #if __name__ == "__main__":
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
+    if __name__ == "__main__":
+        print(request_body)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
 
 def send_text(number, message):
 
+    #config nescesary env variables
     TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID", "OOPS, please specify env var called 'TWILIO_ACCOUNT_SID'")
     TWILIO_AUTH_TOKEN  = os.environ.get("TWILIO_AUTH_TOKEN", "OOPS, please specify env var called 'TWILIO_AUTH_TOKEN'")
     SENDER_SMS  = os.environ.get("SENDER_SMS", "OOPS, please specify env var called 'SENDER_SMS'")
@@ -72,33 +75,34 @@ def send_text(number, message):
     # AUTHENTICATE
     client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
-    # COMPILE REQUEST PARAMETERS (PREPARE THE MESSAGE)
+    #COMPILE REQUEST PARAMETERS (PREPARE THE MESSAGE)
     send_text = number
     content = message
 
-    # ISSUE REQUEST (SEND SMS)
-    message = client.messages.create(to=send_text, from_=SENDER_SMS, body=content)
-
+    try:
+        # ISSUE REQUEST (SEND SMS)
+        message = client.messages.create(to=send_text, from_=SENDER_SMS, body=content)
+    except Exception:
+        print(Exception)
+        print(message)
+    
 def send_tweet (twitterHandle, message):
 
+    #config nescesary env variables
     CONSUMER_KEY = os.environ.get("TWITTER_API_KEY")
     CONSUMER_SECRET = os.environ.get("TWITTER_API_SECRET")
     ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN")
     ACCESS_TOKEN_SECRET = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
 
     # AUTHENTICATE
-
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    #user = client.me() # get information about the currently authenticated user
 
     # INITIALIZE API CLIENT
-
     client = tweepy.API(auth)
 
     # ISSUE REQUEST(S)
-
-    #user = client.me() # get information about the currently authenticated user
-
     status = twitterHandle + "\n" + message 
     tempStatus = message
 
@@ -123,7 +127,10 @@ def send_tweet (twitterHandle, message):
         else:
             response = client.update_status(status=status)
     except tweepy.error.TweepError:
-            print("Already been posted")
+        print("Already been posted")
+    except Exception:
+        print(Exception)
+        print(response)
 
 
 
