@@ -21,7 +21,7 @@ python --version
   * https://developer.nytimes.com
   * https://openweathermap.org/api
   * https://developer.sportradar.com
-   * Select apis for NFL Classic Trial, MLB Trial v6, NHL Official Trial, and NBA Trial
+    * Select apis for NFL Classic Trial, MLB Trial v6, NHL Official Trial, and NBA Trial
   * https://www.alphavantage.co
   * https://developer.twitter.com/en/docs.html
   * https://www.twilio.com
