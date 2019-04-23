@@ -6,7 +6,7 @@
 
 2. Wait until 8AM EST and receive your personalized news update!
 
-* If you wish to unsubcscribe send email to cgm71@georgetown wit your name you used on the google form
+* If you wish to unsubcscribe send an email to cgm71@georgetown with your name you used on the google form
 
 ## Intructions to create this service as a provider
 
@@ -111,7 +111,9 @@ heroku apps:list
 #### App Server Creation
 
 Create a remote Heroku server:
-```heroku apps:create name-of-app```
+```
+heroku apps:create name-of-app
+```
 
 Go to the Heroku online dashboard and find the app's "heroku git url" and subsequently associate this with your git repository: 
 ```
