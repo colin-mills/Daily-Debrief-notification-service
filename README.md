@@ -120,7 +120,9 @@ Go to the Heroku online dashboard and find the app's "heroku git url" and subseq
 git remote add heroku REMOTE_ADDRESS 
 ```
 Ensure this step worked by issuing
-```git remote -v```
+```
+git remote -v
+```
 #### Heroku Environment Configuration
 
 1. Configure the entire json file "client_secret.json" as an environment variable
