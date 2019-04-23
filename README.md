@@ -1,6 +1,6 @@
 # Daily-Debrief-notification-service
 
-## Intructions to use as a user
+## Intructions to use service as a user
 
 1. Fill out google form found at https://forms.gle/1i3dyhMygPTP1VNu7
 
@@ -8,7 +8,19 @@
 
 ## Intructions to create this service as a provider
 
-1.
+### Setup
+
+1. Clone or 
+
+### Intructions
+
+### Deployment
+
+#### Heroku Command Line
+
+#### Heroku Environment Configuration
+
+#### Deploy
 
 ```
 python app/send_notification.py
