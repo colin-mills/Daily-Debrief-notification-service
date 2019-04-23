@@ -8,4 +8,5 @@ gunicorn
 tweepy
 gspread
 oauth2client
+pytest
 
