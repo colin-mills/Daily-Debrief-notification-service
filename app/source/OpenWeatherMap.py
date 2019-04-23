@@ -20,6 +20,7 @@ def getWeatherInfo(zip, email = 0):
         parsed_response = json.loads(response.text)
         city = str(parsed_response["name"])
 
+        #appropriate line breaks for each type of messasge
         if email == 1:
             message_text = message_text + "City: " + city + "<br>"
             message_text = message_text + "Temperature: " + str(parsed_response["main"]["temp"]) + " degrees fahrenheit <br>"
@@ -34,10 +35,6 @@ def getWeatherInfo(zip, email = 0):
             message_text = message_text + "Cloud coverage: " + str(parsed_response["clouds"]["all"]) + "%\n"
             message_text = message_text + "Description: " + parsed_response["weather"][0]["description"] + "\n"
 
-        if __name__ == "__main__":
-            print(parsed_response.keys())
-            print(parsed_response["name"])
-            #print(message_text)
 
     except KeyError as key:
         print(KeyError)
@@ -52,6 +49,8 @@ def getWeatherInfo(zip, email = 0):
         print(message_text)
         print(e.__cause__)
     return message_text
+
+#testing
 if __name__ == "__main__":
     weather = getWeatherInfo("20057")
     print(weather)
