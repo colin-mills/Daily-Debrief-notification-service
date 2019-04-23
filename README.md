@@ -18,14 +18,15 @@ python --version
 * Clone or download this repository into a local directory 
 
 * Create a developer account for these follwing websites and record the provided API keys
-  1. https://developer.nytimes.com
-  2. https://openweathermap.org/api
-  3. https://developer.sportradar.com
-    * _Select apis for NFL Classic Trial, MLB Trial v6, NHL Official Trial, and NBA Trial_
-  4. https://www.alphavantage.co
-  5. https://developer.twitter.com/en/docs.html
-  6. https://www.twilio.com
-  7. https://sendgrid.com
+  * https://developer.nytimes.com
+  * https://openweathermap.org/api
+  * https://developer.sportradar.com
+   * Select apis for NFL Classic Trial, MLB Trial v6, NHL Official Trial, and NBA Trial
+  * https://www.alphavantage.co
+  * https://developer.twitter.com/en/docs.html
+  * https://www.twilio.com
+  * https://sendgrid.com
+  * Follow instructions to create working google development sheet at: https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html 
 
 ### Intructions
 
