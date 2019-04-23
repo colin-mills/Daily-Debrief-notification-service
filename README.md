@@ -6,7 +6,7 @@
 
 2. Wait until 8AM EST and receive your personalized news update!
 
-* If you wis to unsubcscribe send email to cgm71@georgetown wit your name you used on the google form
+* If you wish to unsubcscribe send email to cgm71@georgetown wit your name you used on the google form
 
 ## Intructions to create this service as a provider
 
@@ -32,52 +32,68 @@
 ### Intructions
 1. Create or activate enironment were you can manage packages from
    * If using Anaconda as your language version manager 
-   ```conda create -n yourenvname python=3.7```
+   ```
+   conda create -n yourenvname python=3.7
+   ```
 
 2. Ensure that your python is working in version 3.7
-   ```python --version```
+   ```
+   python --version
+   ```
 3. Install all required packages
-   ```pip install requirements.txt```
+   ```
+   pip install requirements.txt
+   ```
 
 4. create a .env file in your root directory for your environment variables and model it as thus with your own API keys:
 
  **ALPHA Vantage API Key**
+ ```
  ALPHAVANTAGE_API_KEY="Key"
-
+```
  **NY Times API Key**
+ ```
  NYTIMES_API_KEY="Key"
  NYTIMES_SECRET="SecretKey"
-
+```
  **Open Weather API**
+ ```
  OPEN_WEATHER_API_KEY="Key"
-
+```
  **Sports Radar**
+ ```
  MLB_API_KEY="MLBKey"
  NBA_API_KEY="NBAKey"
  NFL_API_KEY="NFLKey"
  NHL_API_KEY="NHLKey"
-
+```
  **for email capabilities**
+ ```
  SENDGRID_API_KEY="Key" 
  MY_EMAIL_ADDRESS="Email" # use the email address you associated with the SendGrid service
-
+```
  **for SMS capabilities**
+ ```
  TWILIO_ACCOUNT_SID="Key"
  TWILIO_AUTH_TOKEN="Token"
  SENDER_SMS="TwilioNumber"
-
+```
  **for tweeting capabilities**
+ ```
  TWITTER_API_KEY="Key"
  TWITTER_API_SECRET="SecretKey"
  TWITTER_ACCESS_TOKEN="Token"
  TWITTER_ACCESS_TOKEN_SECRET="SecretToken"
-
+```
  **GOOGLE Sheets credential**
+ ```
  GOOGLE_SHEET_ID="Google Seet ID"
  SHEET_NAME="name of sheet with user information"
- 
+ ```
  5. Save and commit all changes and test working functionality from command line
- ```pytest```
+ ```
+ pytest
+ ```
 
 ### Deployment
 
@@ -127,8 +143,10 @@ heroku config:set ALPHAVANTAGE_API_KEY="Key"
 git push heroku master
 ```
 
-Once deployed you will need to activate the heroku scheduler to run this command everyday at your desired time
-```python app/send_notification.py```
+Once deployed you will need to activate the heroku scheduler to run this command everyday at your desired time.
+```
+python app/send_notification.py
+```
 
 ### Continous Integration Testing
 To enable continous integration to run on each updated commit you will need to navigate to https://travis-ci.com and go to the settings of your repository and configure each of these environment variables once more.
