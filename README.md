@@ -18,14 +18,14 @@ python --version
 * Clone or download this repository into a local directory 
 
 * Create a developer account for these follwing websites and record the provided API keys:
-    *https://developer.nytimes.com
-    *https://openweathermap.org/api
-    *https://developer.sportradar.com
+    1.https://developer.nytimes.com
+    2.https://openweathermap.org/api
+    3.https://developer.sportradar.com
         *_Select apis for NFL Classic Trial, MLB Trial v6, NHL Official Trial, and NBA Trial_
-    *https://www.alphavantage.co
-    *https://developer.twitter.com/en/docs.html
-    *https://www.twilio.com
-    *https://sendgrid.com
+    4.https://www.alphavantage.co
+    5.https://developer.twitter.com/en/docs.html
+    6.https://www.twilio.com
+    7.https://sendgrid.com
 
 ### Intructions
 
