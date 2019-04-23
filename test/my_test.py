@@ -18,7 +18,7 @@ def test_Get_News():
 
 def test_Get_Weather():
     weather = getWeatherInfo("59718")
-    assert weather != ""
+    assert weather == ""
     assert weather != "Sorry we can't gather weather information at this moment"
     assert weather != "Something unexpected went wrong while gathering weather information."
 
