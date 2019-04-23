@@ -6,7 +6,7 @@ from app.spreadsheet import get_products
 
 def test_Get_Stock():
     stock = GetStockInfo("NKE")
-    assert stock != ""
+    assert stock == ""
     assert stock != "Sorry we can't find any trading data for NKE."
     assert stock != "Something unexpected went wrong while gathering stock information."
 
