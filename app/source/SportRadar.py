@@ -17,7 +17,8 @@ def getSportsInfo(sportLeague, email = 0):
         Date = datetime.datetime.now()
 
         if sport == "NFL":
-
+            
+            #Determines current season
             if Date.month < 9:
                 Season = str(int(Date.year) - 1)
             else:
@@ -25,10 +26,13 @@ def getSportsInfo(sportLeague, email = 0):
 
             API_KEY = os.environ.get("NFL_API_KEY")
             request_url = "http://api.sportradar.us/nfl-t1/teams/{}/rankings.json?api_key={}".format(Season,API_KEY)
+            
             response = requests.get(request_url)
 
+            #Convert to dictionary
             parsed_response = json.loads(response.text)
 
+            #appropriate line breaks for each type of messasge
             if email == 1:
                 message_text = "Rankings for the " + sport + " " + Season + " season: <br>"
                 for conference in parsed_response["conferences"]:
@@ -44,6 +48,7 @@ def getSportsInfo(sportLeague, email = 0):
 
         elif sport == "NBA":
             
+            #Determines current season
             if Date.month < 10:
                 Season = str(int(Date.year) - 1)
             else:
@@ -55,8 +60,10 @@ def getSportsInfo(sportLeague, email = 0):
 
             response = requests.get(request_url)
 
+            #Convert to dictionary
             parsed_response = json.loads(response.text)
 
+            #appropriate line breaks for each type of messasge
             if email == 1:
                 message_text = "Rankings for the " + sport + " " + Season + " season: <br>"
                 for conference in parsed_response["conferences"]:
@@ -71,7 +78,8 @@ def getSportsInfo(sportLeague, email = 0):
                         message_text =  message_text + "The number one team in the " + division["name"] + " is the " + division["teams"][0]["name"] + " (conference: " + str(division["teams"][0]["rank"]["conference"]) + ")\n"
                     
         elif sport == "NHL":
-
+            
+            #Determines current season
             if Date.month < 10:
                 Season = str(int(Date.year) - 1)
             else:
@@ -79,12 +87,12 @@ def getSportsInfo(sportLeague, email = 0):
 
             API_KEY = os.environ.get("NHL_API_KEY")
             request_url = "http://api.sportradar.us/nhl/trial/v6/en/seasons/{}/REG/rankings.json?api_key={}".format(Season,API_KEY)
-            #print(request_url)
             response = requests.get(request_url)
-            #print(response)
-
+           
+            #Convert to dictionary
             parsed_response = json.loads(response.text)
 
+            #appropriate line breaks for each type of messasge
             if email == 1:
                 message_text = "Rankings for the " + sport + " " + Season + " season: <br>"
                 for conference in parsed_response["conferences"]:
@@ -101,24 +109,21 @@ def getSportsInfo(sportLeague, email = 0):
                         message_text =  message_text + "The number two team in the " + division["name"] + " is the " + division["teams"][1]["name"] + " (conference: " + str(division["teams"][1]["rank"]["conference"]) + ")\n"
         elif sport == "MLB":
 
+            #Determines current season
             if Date.month < 3:
                 Season = str(int(Date.year) - 1)
             else:
                 Season = str(Date.year)
-            #print(Season)
 
-            #print(NFL_Season)
             API_KEY = os.environ.get("MLB_API_KEY")
             request_url = "http://api.sportradar.us/mlb/trial/v6.5/en/seasons/{}/REG/rankings.json?api_key={}".format(Season,API_KEY)
-            #print(request_url)
-            response = requests.get(request_url)
-            #print(response)
 
+            #Convert to dictionary
+            response = requests.get(request_url)
             parsed_response = json.loads(response.text)
-            #print(parsed_response.keys())
 
             
-            #message_text = message_text + parsed_response["league"]["name"] + ": \n"
+            #appropriate line breaks for each type of messasge
             if email == 1:
                 message_text = "Rankings for the " + sport + " " + Season + " season: <br>"
                 for league in parsed_response["league"]["season"]["leagues"]:
@@ -146,6 +151,7 @@ def getSportsInfo(sportLeague, email = 0):
         print(e.__cause__)
     return message_text
 
+#testing
 if __name__ == "__main__":
     message = getSportsInfo("NFL")
     print(message)
