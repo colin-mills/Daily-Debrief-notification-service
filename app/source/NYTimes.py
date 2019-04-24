@@ -56,5 +56,8 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
 
 #testing
 if __name__ == "__main__":
-    message = GetNYTArticles(4,0,0)
-    print(message)
+        x=0
+        for x in range(5):
+                message = GetNYTArticles(x,1,0)
+                print(message)
+                x = x+1
