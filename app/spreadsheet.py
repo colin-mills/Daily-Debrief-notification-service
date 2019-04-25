@@ -21,9 +21,7 @@ server = True
 DOCUMENT_KEY = os.environ.get("GOOGLE_SHEET_ID", "OOPS Please get the spreadsheet identifier from its URL")
 SHEET_NAME = os.environ.get("SHEET_NAME", "OOPS Please get the spreadsheet identifier from its URL")
 
-#if server == False:
-#    CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
-#elif server == True:
+#CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "auth", "spreadsheet_credentials.json")
 GOOGLE_API_CREDENTIALS = os.environ.get("GOOGLE_API_CREDENTIALS")
 
 AUTH_SCOPE = [
@@ -33,11 +31,8 @@ AUTH_SCOPE = [
 
 def get_products():
     try:
-        #if server == False:
-        #    credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
-        #elif server == True:
+        #credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
         credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS), AUTH_SCOPE)
-        
         client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
         doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
         sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
