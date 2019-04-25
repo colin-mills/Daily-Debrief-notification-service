@@ -36,7 +36,8 @@ def get_products():
         if server == False:
             credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
         elif server == True:
-            credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS, AUTH_SCOPE)
+            credentials = ServiceAccountCredentials._from_parsed_json_keyfile(json.loads(GOOGLE_API_CREDENTIALS, AUTH_SCOPE))
+        
         client = gspread.authorize(credentials) #> <class 'gspread.client.Client'>
         doc = client.open_by_key(DOCUMENT_KEY) #> <class 'gspread.models.Spreadsheet'>
         sheet = doc.worksheet(SHEET_NAME) #> <class 'gspread.models.Worksheet'>
