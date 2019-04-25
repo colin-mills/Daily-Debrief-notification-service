@@ -4,6 +4,7 @@ import json
 import requests
 import datetime
 import statistics
+import time
 
 def GetStockInfo(ChosenStockTicker, email = 0):
     try:
@@ -14,7 +15,7 @@ def GetStockInfo(ChosenStockTicker, email = 0):
         API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
         # AUTHENTICATE
         stockTicker = ChosenStockTicker
-
+        time.sleep(1)
         request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={}&apikey={}".format(stockTicker, API_KEY)
         #parses this data from json to dict
         response = requests.get(request_url)
@@ -109,6 +110,11 @@ def GetStockInfo(ChosenStockTicker, email = 0):
         print(message_text)
         print(e.__cause__)
     return message_text
+
+if __name__ == "__main__":
+    stock = input("Please enter a stock: ")
+    print(GetStockInfo(stock))
+
 
 
 

@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import json
 import requests
+import time
 
 
 def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
@@ -23,7 +24,7 @@ def GetNYTArticles(ArticleNum = 0, email = 0,tweet = 0):
                 # AUTHENTICATE
 
                 #stockTicker = ChosenStockTicker
-
+                time.sleep(1)
                 request_url = "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key={}".format( API_KEY)
                 #parses this data from json to dict
                 response = requests.get(request_url)
