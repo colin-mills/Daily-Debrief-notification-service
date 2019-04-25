@@ -16,7 +16,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 load_dotenv()
 
-server = False
+server = True
 
 DOCUMENT_KEY = os.environ.get("GOOGLE_SHEET_ID", "OOPS Please get the spreadsheet identifier from its URL")
 SHEET_NAME = os.environ.get("SHEET_NAME", "OOPS Please get the spreadsheet identifier from its URL")
